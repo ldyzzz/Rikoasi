@@ -4,7 +4,14 @@
       <input type="text" placeholder="搜索" @change="search" v-model="inpts" />
     </div>
     <div class="lista">
-      <dl v-for="(item, index) in list" :key="index">
+      <dl v-for="(item, index) in list" :key="index" class="xuanran">
+        <dt><img :src="item.img" alt="" /></dt>
+        <dd>
+          <p>{{ item.title }}</p>
+          <p>{{ item.content }}</p>
+        </dd>
+      </dl>
+        <dl v-for="(item, index) in data" :key="index">
         <dt><img :src="item.img" alt="" /></dt>
         <dd>
           <p>{{ item.title }}</p>
@@ -22,13 +29,14 @@ export default {
     return {
       list: [],
       inpts: "",
+      data:[],
     };
   },
   created() {
     this.getList();
   },
   computed() {
-    
+
   },
 
   methods: {
@@ -44,7 +52,9 @@ export default {
     search() {
       console.log(this.inpts);
       const result = this.list.filter((item) => item.title === this.inpts);
-      console.log(result);
+      // console.log(result);
+      this.data = result;
+      document.querySelector(".xuanran").style.display = "none"
     },
   },
 };
